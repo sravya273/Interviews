@@ -1,0 +1,116 @@
+//Given a string, the idea is to decompose it into a list of substrings, called phrases. 
+//These phrases follow three rules:
+//- The concatenation of all of them is the original string.
+//- Every new phrase is either a single character or a previous phrase or a previous phrase with a single character appended to it.
+//- Each new phrase is as long as possible.
+//
+//eg:
+//
+//bananaann -> b a n an aa nn
+//Goooooogle -> g o oo ooo gl e
+
+//ogooooogle -> o g oo .....
+
+ggjshdoos -> g gj s h d o os
+void findAllPhrases(string s, unordered_set &phrases)
+{
+    phrases.insert(s[0]);
+    int i=0;
+    while(i<s.length())
+    {
+        if(phrases.find(s[i])==phases.end())
+        {
+            phrases.insert(s[i]);
+            i++;
+        }
+        else
+        {
+            string ph=s[i];
+            while(phrases.find(ph)!=phrases.end())
+            {
+                i++;
+                ph.append(s[i]);
+            }
+            phrases.insert(ph);
+            if(i==n-1)
+            {
+                phrases.insert(ph);
+            }
+        }
+    }
+}
+int main()
+{
+unordered_set <string>phrases;
+string s;
+cin>>s;
+findAllPhrases(s,phrases);
+}
+
+
+banaaanan -> 
+-i=0 
+phrases b
+i=1
+phrases b a
+i=2
+phrases b a n
+i=3
+ph aa
+phrases b a n aa
+i=4
+ph an
+phrases b a n aa an
+
+
+Input:  {8, 4, 2, 1}
+Output: 4
+The four inversions are (8,4,2), (8,4,1), (4,2,1) and (8,2,1)
+
+Input:  {9, 6, 4, 5, 8}
+Output:  2
+The two inversions are {9, 6, 4} and {9, 6, 5}
+
+
+Three elements arr[i], arr[j] and arr[k] form an inversion of size 3 
+if a[i] > a[j] >a[k] and i < j < k. 
+
+count = 0
+i=1
+a[1] left 1 right 2 (9 6 4) (9 6 5)
+a[2] left 2 right 0
+a[3] left 
+
+
+int countInversions(int array[],int n)
+{
+    int count =0;
+    for(int i=1 ;i<n-1;i++)
+    {
+        int left =0;
+        for(int j=0;j<i;j++)
+        {
+            if(a[j]>a[i])
+            left++;
+        }
+        int right =0;
+        for(int k=i+1;k<n;k++)
+        {
+            if(a[k]<a[i])
+            right++;
+        }
+        count += left*right;
+    }
+    return count;
+}
+
+8 4 2 1
+4 left =1 
+right = 2
+count =2
+
+i=2 2
+left = 2
+right =1
+count =2+2 =4
+
