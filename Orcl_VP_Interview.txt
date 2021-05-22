@@ -1,0 +1,85 @@
+Problem Statement: 
+
+A building has 10 floors. Cafeteria is on the first floor. There are 3000 employees evenly distributed across 10 floors.Employees come to work between 8 am to 9:30 am and leave between 5pm to 6:30 pm.
+Lunch is from 1pm to 2pm. There are 6 elevators. Floor where the employee wishes to go is chosen before the employee enters the elevator. Provide an algorithm and code to minimize the waiting time of the elevator.
+
+Class Elevator{
+	private int currentFloor;
+	private int direction;  // 0 ->static, 1->down, 2->top
+	private int capacity;
+	
+	Elevator(){
+		
+	}
+	
+	Elevator(int currentFloor,int direction, int capacity){
+	this.currentFloor = currentFloor;
+	this.direction = direction;
+	this.capacity = capacity;
+	}
+	
+}
+
+Class ElevatorService{
+
+public static void main(){
+
+ArrayList<Elevator> ElevatorList = new ArrayList<Elevator>(6);
+
+if(currentTime>=1pm && currentTime<=2pm){
+	ElevatorList.clear();
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+}
+
+if(currentTime>=8am && currentTime<=9:30am){
+	ElevatorList.clear();
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(0,0,0));
+	ElevatorList.add(new Elevator(0,0,0));
+}
+
+if(currentTime>=5pm && currentTime<=6:30pm){
+	ElevatorList.clear();
+	ElevatorList.add(new Elevator(10,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+	ElevatorList.add(new Elevator(10,0,0));
+}
+}
+
+class ElevatorRequest{
+	public static int getElevator(int requestedFloor){
+		
+		for(int i=0;i<6;i++)
+		{
+			if(ElevatorList[i].getCurrentFloor() == requestedFloor && ElevatorList[i].getCapacity()<10)
+			return i;
+		}
+		
+		int count=INT_MAX;
+		int currentSolution=0;
+		
+		for(int i=0;i<6;i++)
+		{
+		int distance = ElevatorList[i].getCurrentFloor()-requestedFloor;
+		if(ElevatorList[i].getDirection()==1 && distance>0 && count>distance)
+		{
+			count = distance;
+			currentSolution = i;
+		}	
+		}
+		return currentSolution;
+		
+	}
+}
+
